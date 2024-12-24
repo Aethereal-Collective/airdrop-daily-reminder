@@ -5,7 +5,8 @@ const client = new Client({
 	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers],
 });
 
-const ANNOUNCEMENT_CHANNEL_ID = "1320949418647879680"; // Replace with the announcement channel ID
+const NEW_CHANNEL_ID = "1320949418647879680"; // Replace with the announcement channel ID
+const UPDATE_CHANNEL_ID = "1320977152421793802"; // Replace with the announcement channel ID
 
 client.once("ready", () => {
 	console.log("Discord bot is ready! 🤖");
@@ -20,8 +21,10 @@ client.on("messageCreate", async (message) => {
 
 // Handle messages mentioning specific roles
 async function handleForumMessage(message: any) {
-	const announcementChannel = client.channels.cache.get(ANNOUNCEMENT_CHANNEL_ID) as TextChannel;
-	if (!announcementChannel) return;
+	const newChannel = client.channels.cache.get(NEW_CHANNEL_ID) as TextChannel;
+	const updateChannel = client.channels.cache.get(UPDATE_CHANNEL_ID) as TextChannel;
+
+	if (!newChannel && !updateChannel) return;
 
 	const forumTitle = message.channel.name; // Get thread (forum) title
 	const forumLink = message.channel.url; // Get thread URL
@@ -38,7 +41,11 @@ async function handleForumMessage(message: any) {
 			.setColor(roleType === "Update Garapan" ? 0x00ff00 : 0xffa500); // Green for update, orange for new
 
 		// Send the announcement
-		announcementChannel.send({ content: `<@&1201643245319495791>, ${roleType === "Update Garapan" ? "Update Garapan 📢 dari " : "Garapan Baru 📢 dari "} **${forumTitle}**`, embeds: [embed] });
+		if (roleType === "New Garapan") {
+			newChannel.send({ content: `<@&1201643245319495791>, Garapan Baru 📢 dari **${forumTitle}**`, embeds: [embed] });
+		} else {
+			updateChannel.send({ content: `<@&1201643245319495791>, Update Garapan 📢 dari **${forumTitle}**`, embeds: [embed] });
+		}
 	}
 }
 
