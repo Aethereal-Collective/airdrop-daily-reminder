@@ -21,7 +21,7 @@ COPY --from=build /app/package.json ./package.json
 
 RUN yarn global add pm2
 
-EXPOSE 3000
+EXPOSE 5000
 
 CMD ["pm2-runtime", "dist/index.cjs"]
 

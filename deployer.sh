@@ -19,5 +19,5 @@ docker rm $CONTAINER_NAME || true
 echo "Removed existing container (if any)."
 
 # Run the container
-docker run -d --name $CONTAINER_NAME -p 3000:3000 --env-file .env $CONTAINER_NAME
-echo "Container started successfully on port 3000."
+docker run -d --name $CONTAINER_NAME -p 5000:5000 --env-file .env $CONTAINER_NAME
+echo "Container started successfully on port 5000."
