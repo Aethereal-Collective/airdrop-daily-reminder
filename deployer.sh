@@ -1,7 +1,7 @@
 echo "Starting deploy script..."
 set -e
 
-CONTAINER_NAME="aethereal-funding"
+CONTAINER_NAME="aethereal-reminder"
 echo "Container name set to $CONTAINER_NAME"
 
 # Load environment variables
