@@ -1,18 +1,17 @@
 # Stage 1: Build
-FROM node:24-alpine AS build
+FROM node:18-alpine AS build
 
 WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
 COPY . .
-
 RUN yarn build
 
 # Stage 2: Final image
-FROM node:24-alpine
+FROM node:18-alpine
 
 WORKDIR /app
 
