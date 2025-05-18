@@ -6,20 +6,28 @@
 	"scripts": {
 		"dev": "tsx watch src/index.ts",
 		"start": "node dist/index.js",
-		"build": "tsup src/index.ts --minify"
+		"build": "tsup src/index.ts --minify",
+		"deploy": "node --loader ts-node/esm src/deploy-command.ts"
 	},
 	"dependencies": {
 		"alchemy-sdk": "^3.4.3",
 		"axios": "^1.7.7",
-		"discord.js": "^14.16.3",
+		"better-sqlite3": "^11.10.0",
+		"cron": "^4.3.0",
+		"discord.js": "^14.19.3",
 		"dotenv": "^16.4.5",
 		"lit": "^3.2.0",
-		"nodemon": "^3.1.7"
+		"node-cron": "^4.0.5",
+		"nodemon": "^3.1.7",
+		"sqlite": "^5.1.1",
+		"sqlite3": "^5.1.7"
 	},
 	"devDependencies": {
+		"@types/node": "^22.15.18",
+		"ts-node": "^10.9.2",
 		"tsup": "^8.3.0",
 		"tsx": "^4.19.1",
-		"typescript": "^5.6.3",
+		"typescript": "^5.8.3",
 		"vite": "^5.4.8"
 	}
 }
