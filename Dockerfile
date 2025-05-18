@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM node:18-alpine AS build
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ COPY . .
 RUN yarn build
 
 # Stage 2: Final image
-FROM node:18-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
@@ -21,6 +21,6 @@ COPY --from=build /app/package.json ./package.json
 
 RUN yarn global add pm2
 
-EXPOSE 5004
+EXPOSE 5005
 
 CMD ["pm2-runtime", "dist/index.cjs"]
