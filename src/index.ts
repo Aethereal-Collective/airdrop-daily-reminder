@@ -21,7 +21,14 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once(Events.ClientReady, (c) => {
 	console.log(`✅ Logged in as ${c.user.tag}`);
-	cron.schedule("0 0 * * *", () => sendReminders(), { timezone: "UTC" });
+	cron.schedule(
+		"0 0 0 * * *",
+		() => {
+			console.log("Cron job running... at" + new Date().toISOString());
+			sendReminders();
+		},
+		{ timezone: "UTC" }
+	);
 });
 
 client.on(Events.InteractionCreate, async (i) => {
