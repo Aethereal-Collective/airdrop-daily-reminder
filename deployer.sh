@@ -22,12 +22,16 @@ echo "Stopped existing container (if any)."
 docker rm $CONTAINER_NAME || true
 echo "Removed existing container (if any)."
 
-# Run the container with volume mount
+# Ensure DB file exists
+touch reminders.db
+
+# Run the container with only the DB mounted
 docker run -d \
   --name $CONTAINER_NAME \
   -p 5005:5005 \
   --env-file .env \
-  -v "$APP_DIR:/app" \
+  -v "$APP_DIR/reminders.db:/app/reminders.db" \
   $CONTAINER_NAME
+
 
 echo "Container started successfully on port 5005 with volume mounted."
