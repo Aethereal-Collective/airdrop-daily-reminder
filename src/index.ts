@@ -25,7 +25,7 @@ client.once(Events.ClientReady, (c) => {
 	console.log("🕒 UTC time:", new Date().toUTCString());
 
 	cron.schedule(
-		"35 0 * * *",
+		"50 7 * * *",
 		async () => {
 			console.log("🚀 Cron job running at " + new Date().toISOString());
 			try {
@@ -34,7 +34,7 @@ client.once(Events.ClientReady, (c) => {
 				console.error("❌ Error in sendReminders:", err);
 			}
 		},
-		{ timezone: "UTC" }
+		{ timezone: "Asia/Jakarta" }
 	);
 });
 

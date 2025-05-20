@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM node:20-alpine AS build
+FROM node:20 AS build
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ COPY . .
 RUN yarn build
 
 # Stage 2: Final image
-FROM node:20-alpine
+FROM node:20
 
 WORKDIR /app
 
