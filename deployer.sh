@@ -1,8 +1,12 @@
+#!/bin/bash
+
 echo "Starting deploy script..."
 set -e
 
 CONTAINER_NAME="aethereal-daily-reminder"
+APP_DIR="$(pwd)"  # Current directory
 echo "Container name set to $CONTAINER_NAME"
+echo "App directory set to $APP_DIR"
 
 # Load environment variables
 export $(grep -v '^#' .env | xargs)
@@ -18,6 +22,12 @@ echo "Stopped existing container (if any)."
 docker rm $CONTAINER_NAME || true
 echo "Removed existing container (if any)."
 
-# Run the container
-docker run -d --name $CONTAINER_NAME -p 5005:5005 --env-file .env $CONTAINER_NAME
-echo "Container started successfully on port 5005."
+# Run the container with volume mount
+docker run -d \
+  --name $CONTAINER_NAME \
+  -p 5005:5005 \
+  --env-file .env \
+  -v "$APP_DIR:/app" \
+  $CONTAINER_NAME
+
+echo "Container started successfully on port 5005 with volume mounted."
