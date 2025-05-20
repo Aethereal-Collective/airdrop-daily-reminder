@@ -21,11 +21,18 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once(Events.ClientReady, (c) => {
 	console.log(`✅ Logged in as ${c.user.tag}`);
+	console.log("🕒 Server time:", new Date().toString());
+	console.log("🕒 UTC time:", new Date().toUTCString());
+
 	cron.schedule(
-		"0 0 0 * * *",
-		() => {
-			console.log("Cron job running... at" + new Date().toISOString());
-			sendReminders();
+		"0 30 0 * * *",
+		async () => {
+			console.log("🚀 Cron job running at " + new Date().toISOString());
+			try {
+				await sendReminders();
+			} catch (err) {
+				console.error("❌ Error in sendReminders:", err);
+			}
 		},
 		{ timezone: "UTC" }
 	);
