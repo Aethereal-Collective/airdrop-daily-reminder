@@ -25,7 +25,7 @@ client.once(Events.ClientReady, (c) => {
 	console.log("🕒 UTC time:", new Date().toUTCString());
 
 	cron.schedule(
-		"0 30 0 * * *",
+		"35 0 * * *",
 		async () => {
 			console.log("🚀 Cron job running at " + new Date().toISOString());
 			try {
